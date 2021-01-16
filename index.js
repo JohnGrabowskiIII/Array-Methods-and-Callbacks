@@ -29,10 +29,34 @@ console.log(awayTeam2014Final[8]);
 
 //(c) Home Team goals for 2014 world cup final
 
+const homeGoals2014Final = Object.values(fifaData.filter(function(final2014) {
+    if ((final2014["Year"] === 2014) && (final2014["Stage"] === "Final")) {
+        return final2014;
+    }
+})[0]);
+
+console.log(homeGoals2014Final[6]);
+
+
 //(d) Away Team goals for 2014 world cup final
+
+const awayGoals2014Final = Object.values(fifaData.filter(function(final2014) {
+    if ((final2014["Year"] === 2014) && (final2014["Stage"] === "Final")) {
+        return final2014;
+    }
+})[0]);
+
+console.log(awayGoals2014Final[7]);
 
 //(e) Winner of 2014 world cup final */
 
+const winner2014Final = Object.values(fifaData.filter(function(final2014) {
+    if ((final2014["Year"] === 2014) && (final2014["Stage"] === "Final")) {
+        return final2014;
+    }
+})[0]);
+
+console.log(winner2014Final[9]);
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 2: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use getFinals to do the following:
