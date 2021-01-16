@@ -7,7 +7,25 @@ Practice accessing data by console.log-ing the following pieces of data note, yo
 
 //(a) Home Team name for 2014 world cup final
 
+const homeTeam2014Final = Object.values(fifaData.filter(function(final2014) {
+    if ((final2014["Year"] === 2014) && (final2014["Stage"] === "Final")) {
+        return final2014;
+    }
+})[0]);
+
+console.log(homeTeam2014Final[5]);
+
+
 //(b) Away Team name for 2014 world cup final
+
+const awayTeam2014Final = Object.values(fifaData.filter(function(final2014) {
+    if ((final2014["Year"] === 2014) && (final2014["Stage"] === "Final")) {
+        return final2014;
+    }
+})[0]);
+
+console.log(awayTeam2014Final[8]);
+
 
 //(c) Home Team goals for 2014 world cup final
 
