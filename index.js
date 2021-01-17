@@ -7,14 +7,17 @@ Practice accessing data by console.log-ing the following pieces of data note, yo
 
 //(a) Home Team name for 2014 world cup final
 
-const homeTeam2014Final = Object.values(fifaData.filter(function(final2014) {
-    if ((final2014["Year"] === 2014) && (final2014["Stage"] === "Final")) {
-        return final2014;
-    }
-})[0]);
+// const homeTeam2014Final = Object.values(fifaData.filter(function(final2014) {
+    // if ((final2014["Year"] === 2014) && (final2014["Stage"] === "Final")) {
+    //    return final2014;
+    // }
+// })[0]);
 
-console.log(homeTeam2014Final[5]);
+// console.log(homeTeam2014Final[5]);
 
+const homeTeam2014Final = fifaData.filter((item) => (item.Year === 2014) && (item.Stage === "Final"));
+
+console.log(homeTeam2014Final[0]["Home Team Name"]);
 
 //(b) Away Team name for 2014 world cup final
 
@@ -102,8 +105,17 @@ Use the higher-order function getWinners to do the following:
 3. Determines the winner (home or away) of each `finals` game. 
 4. Returns the names of all winning countries in an array called `winners` */ 
 
-function getWinners(/* code here */) {
-    /* code here */
+function getWinners(array, cb) {
+    let winnersArray = cb(array);
+    let winners = [];
+    winnersArray.map(function(finalWinners) {
+        if (finalWinners["Home Team Goals"] > finalWinners["Away Team Goals"]) {
+            winners.push(finalWinners["Home Team Name"]);
+        } else {
+            winners.push(finalWinners["Away Team Name"]);
+        }
+    });
+    return winners;
 }
 
 
@@ -118,8 +130,18 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(/* code here */) {
-    /* code here */
+function getWinnersByYear(array, cbYear, cbWinner) {
+    // Declare variables and callbacks
+    let cbYearArray = cbYear(array), cbWinnerArray = cbWinner(array);
+    let stringYearArray = [], stringWinnerArray = [], stringArrayLast = [];
+    // Iterate through arrays and push to new ones
+    cbYearArray.forEach(item => stringYearArray.push(item));
+    cbWinnerArray.forEach(item => stringWinnerArray.push(item));
+    // Iterate through new arrays and push new string to stringArrayLast
+    stringYearArray.filter(function(item, index){
+        stringArrayLast.push(`In ${item}, ${stringWinnerArray[index]} won the world cup!`);
+    })
+    return stringArrayLast;
 }
 
 
@@ -134,8 +156,11 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 
-function getAverageGoals(/* code here */) {
-   /* code here */
+function getAverageGoals(callback) {
+   let avgGoal = callback.reduce(function(acc, item) {
+        return (item["Home Team Goals"] + item["Away Team Goals"]) + acc;
+   }, 0);
+   return (avgGoal / callback.length).toFixed(2);
 }
 
 
